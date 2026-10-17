@@ -10,12 +10,17 @@ function Dash() {
   const [course, setCourse] = useState("");
 
   const submit = async () => {
-    await axios.post("http://localhost:3002/students", {
-      name,
-      course
-    });
+    try {
+      await axios.post("http://localhost:3002/students", {
+        name,
+        course,
+      });
 
-    navigate("/profile");
+      navigate("/profile");
+    } catch (error) {
+      console.error("Error saving student:", error);
+      alert("Failed to save student. Check JSON Server.");
+    }
   };
 
   return (
